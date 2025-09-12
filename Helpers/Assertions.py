@@ -22,3 +22,8 @@ class Asserts:
         assert key in response_json, f'Ключ "{key}" отсутствует в JSON - ответе'
         actual_value = response_json[key]
         assert actual_value == value, f'Ожидалось "{value}" \n получено "{actual_value}"'
+
+    def assert_all_completed(items: list):
+        assert all(item.get("completed") is True for item in items), (
+            "Не все элементы имеют completed=True"
+        )
