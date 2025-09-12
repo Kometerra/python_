@@ -1,1 +1,7 @@
 .idea/*
+.env
+test.log
+.venv
+report.html
+htmlcov
+.coverage
