@@ -1,9 +1,10 @@
 import pytest
 from requests import Response
 
-from helpers.assertions import Asserts
+from Helpers.Assertions import Asserts
 import logging
 
+from Helpers.helpers import get_random_items_by_completed_flag
 
 @pytest.mark.todos
 def test_successful_todo(get_todo_data):
@@ -31,3 +32,10 @@ def test_todo_by_id(get_todo_data, todo_id, status):
     Asserts.assert_status_code(reg_response, status)
     Asserts.assert_json_has_key_value(reg_response, 'id', todo_id)
     Asserts.assert_json_has_key(reg_response, 'userId')
+
+@pytest.mark.todos
+def test_my_todos(get_todo_data):
+    reg_response = get_todo_data.todo_list()
+    reg_response = get_random_items_by_completed_flag(reg_response)
+    logging.info(reg_response)
+    Asserts.assert_all_completed(reg_response)
