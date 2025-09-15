@@ -2,9 +2,8 @@ import pytest
 from requests import Response
 
 from Helpers.Assertions import Asserts
+from Helpers.helpers import Helpers
 import logging
-
-from Helpers.helpers import get_random_items_by_completed_flag
 
 @pytest.mark.todos
 def test_successful_todo(get_todo_data):
@@ -34,8 +33,21 @@ def test_todo_by_id(get_todo_data, todo_id, status):
     Asserts.assert_json_has_key(reg_response, 'userId')
 
 @pytest.mark.todos
-def test_my_todos(get_todo_data):
+def test_my_todos(get_todo_data, get_default_count_todo_items):
     reg_response = get_todo_data.todo_list()
-    reg_response = get_random_items_by_completed_flag(reg_response)
-    logging.info(reg_response)
-    Asserts.assert_all_completed(reg_response)
+    reg_response = Helpers.get_random_items_by_completed_flag(
+        response=reg_response,
+        count=get_default_count_todo_items,
+        completed_flag=True
+    )
+    Asserts.assert_all_completed(reg_response, completed= True)
+
+@pytest.mark.todos
+def test_my_todos2(get_todo_data, get_default_count_todo_items):
+    reg_response = get_todo_data.todo_list()
+    reg_response = Helpers.get_random_items_by_completed_flag(
+        response=reg_response,
+        count=get_default_count_todo_items,
+        completed_flag=False
+    )
+    Asserts.assert_all_completed(reg_response, completed= False)

@@ -27,3 +27,12 @@ def get_base_url():
 @pytest.fixture()
 def get_todo_data(get_base_url):
     return TodoApi(get_base_url)
+
+# 🔢 COUNT из .env
+@pytest.fixture(scope="session")
+def get_default_count_todo_items() -> int:
+    count = os.getenv("DEFAULT_COUNT_TODO_ITEMS", "5")
+    try:
+        return int(count)
+    except ValueError:
+        pytest.fail("DEFAULT_COUNT_TODO_ITEMS должен быть числом")

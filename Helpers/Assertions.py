@@ -23,7 +23,7 @@ class Asserts:
         actual_value = response_json[key]
         assert actual_value == value, f'Ожидалось "{value}" \n получено "{actual_value}"'
 
-    def assert_all_completed(items: list):
-        assert all(item.get("completed") is True for item in items), (
-            "Не все элементы имеют completed=True"
+    def assert_all_completed(items: list, completed: bool = True):
+        assert all(item.get("completed") is completed for item in items), (
+            f'Не все элементы имеют completed= "{completed}"'
         )
