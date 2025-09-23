@@ -1,8 +1,7 @@
 import pytest
-from requests import Response
 
-from Helpers.Assertions import Asserts
-from Helpers.helpers import Helpers
+from Tests.API.Helpers.Assertions import Asserts
+from Tests.API.Helpers.helpers import Helpers
 import logging
 
 @pytest.mark.todos
@@ -51,3 +50,14 @@ def test_my_todos2(get_todo_data, get_default_count_todo_items):
         completed_flag=False
     )
     Asserts.assert_all_completed(reg_response, completed= False)
+
+@pytest.mark.todos
+@pytest.mark.parametrize("todo_id, status",[
+    ('abc',404),
+    (-10,404),
+])
+def test_todo_invalid_id(get_todo_data, todo_id, status):
+    reg_response = get_todo_data.todo_list(todo_id = todo_id)
+    logging.info(reg_response.json())
+    Asserts.assert_status_code(reg_response, status)
+    Asserts.assert_json_empty(reg_response)

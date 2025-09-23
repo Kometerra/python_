@@ -1,4 +1,4 @@
-from api_frame.base_api import BaseApi
+from Tests.API.api_frame.base_api import BaseApi
 
 class TodoApi(BaseApi):
     REG_ENDPOINT = 'todos'

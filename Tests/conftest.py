@@ -2,7 +2,7 @@ import pytest
 import os
 import logging
 from dotenv import load_dotenv
-from api_frame.todo_api import TodoApi
+from Tests.API.api_frame.todo_api import TodoApi
 
 load_dotenv()
 
@@ -23,6 +23,11 @@ def pytest_configure(config):
 def get_base_url():
     return os.getenv('BASE_URL')
 
+@pytest.fixture(scope="session")
+def get_base_url_ui():
+    return os.getenv('BASE_URL_UI')
+
+
 # 📦 Фикстура для API-клиента
 @pytest.fixture()
 def get_todo_data(get_base_url):
@@ -36,3 +41,13 @@ def get_default_count_todo_items() -> int:
         return int(count)
     except ValueError:
         pytest.fail("DEFAULT_COUNT_TODO_ITEMS должен быть числом")
+
+# 🧭 Playwright Page
+@pytest.fixture()
+def page(playwright):
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+    yield page
+    context.close()
+    browser.close()

@@ -1,8 +1,8 @@
 import random
 from requests import Response
-from api_frame.base_api import BaseApi
 
-class Helpers(BaseApi):
+
+class Helpers:
     @staticmethod
     def get_random_items_by_completed_flag(
         response: Response,
