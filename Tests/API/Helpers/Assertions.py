@@ -27,3 +27,8 @@ class Asserts:
         assert all(item.get("completed") is completed for item in items), (
             f'Не все элементы имеют completed= "{completed}"'
         )
+
+    def assert_json_empty(response: Response):
+        response_json = response.json()
+        assert response_json == {}, \
+        f'Ожидался пустой json'
