@@ -3,3 +3,4 @@ requests
 python-dotenv
 pytest_html
 pytest_cov
+playwright

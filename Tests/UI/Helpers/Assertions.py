@@ -7,7 +7,8 @@ class UIAssertions:
         )
 
     @staticmethod
-    def assert_element_visible(element):
+    def assert_element_visible(element,timeout: int=5000):
+        element.wait_for(state="visible", timeout=timeout)
         assert element.is_visible(), "Элемент не отображается на странице"
 
     @staticmethod
