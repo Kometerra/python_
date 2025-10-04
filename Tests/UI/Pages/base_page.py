@@ -31,3 +31,11 @@ class BasePage:
 
     def get_text(self, selector: str):
         return self.page.locator(selector).inner_text()
+
+    def click_by_selector_and_text(self,selector: str,text: str, flag: bool):
+        self.page.locator(selector).get_by_text(text,exact=flag).click()
+
+    def get_element_by_selector_and_text(self,selector: str,text: str, flag: bool):
+        return self.page.locator(selector).get_by_text(text,exact=flag)
+
+
