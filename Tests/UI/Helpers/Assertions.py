@@ -1,3 +1,7 @@
+import logging
+from playwright.sync_api import expect
+
+
 class UIAssertions:
     @staticmethod
     def assert_text_equals(element, expected_text: str):
@@ -22,3 +26,10 @@ class UIAssertions:
         assert actual_title == expected_title, (
             f'Ожидался заголовок: "{expected_title}", но получен: "{actual_title}"'
         )
+
+    @staticmethod
+    def assert_check_many_texts(elements, expected_text: list[str]):
+        elements = elements.all()
+        for i, (el, expected) in enumerate(zip(elements, expected_text)):
+            text = el.text_content()
+            assert expected in text, f'Ожидали {expected}, получили {text}'
