@@ -1,5 +1,6 @@
 
 
 class Endpoints:
-    ENDPOINT_HOME ='/'
-    ENDPOINT_VKLADY = '/vklady'
+    HOME ='/'
+    VKLADY = '/vklady'
+    MICROZAIM = '/zaimy'

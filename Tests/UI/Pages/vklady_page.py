@@ -5,7 +5,7 @@ from Tests.UI.Helpers.Endpoints import Endpoints
 class VkladyPage(BasePage):
 
     def open(self):
-        self.open_page(Endpoints.ENDPOINT_VKLADY)
+        self.open_page(Endpoints.VKLADY)
 
     def fill_money(self, quantity: str):
         self.click(VkladySelectors.INPUT_MONEY.value)
