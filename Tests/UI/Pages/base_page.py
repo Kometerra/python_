@@ -38,4 +38,13 @@ class BasePage:
     def get_element_by_selector_and_text(self,selector: str,text: str, flag: bool):
         return self.page.locator(selector).get_by_text(text,exact=flag)
 
+    def click_coordinates(self,selector: str, percent:float):
+        track = self.page.locator(selector)
+        box = track.bounding_box()
+        x = box["x"] + box["width"] * percent
+        y = box["y"] + box["height"] / 2
+        print(x,y)
+        self.page.mouse.click(x,y)
+
+
 
