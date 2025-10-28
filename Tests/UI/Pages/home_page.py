@@ -4,7 +4,7 @@ from Tests.UI.Helpers.Endpoints import Endpoints
 
 class HomePage(BasePage):
     def open(self):
-        self.open_page(Endpoints.ENDPOINT_HOME)
+        self.open_page(Endpoints.HOME)
 
     def click_button(self, text: str = "JSON Server"):
         xpath = HomeSelectors.JSON_SERVER_BUTTON_XPATH.format(text=text)
