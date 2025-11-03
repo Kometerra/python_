@@ -50,5 +50,6 @@ class BasePage:
         self.page.reload()
         self.page.wait_for_load_state("domcontentloaded")
 
-
+    def click_by_selector_and_text_and_index(self,selector: str,text: str, index: int):
+        self.page.locator(selector).get_by_text(text,exact=True).nth(index).click()
 
