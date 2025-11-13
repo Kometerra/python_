@@ -51,3 +51,7 @@ def page(playwright):
     yield page
     context.close()
     browser.close()
+
+@pytest.fixture(scope="session")
+def timeout():
+    return int(os.getenv("DEFAULT_TIMEOUT"))

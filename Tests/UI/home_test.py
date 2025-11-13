@@ -1,7 +1,8 @@
 import pytest
-from Pages.home_page import HomePage
+from Tests.UI.Pages.home_page import HomePage
 from Tests.UI.Helpers.Assertions import UIAssertions
 
+@pytest.mark.ui
 @pytest.mark.home
 def test_menu_credit_button(page, get_base_url_ui):
     some_page = HomePage(page, get_base_url_ui)
@@ -10,7 +11,7 @@ def test_menu_credit_button(page, get_base_url_ui):
     button = some_page.get_menu_credit_button("Кредиты")
     UIAssertions.assert_element_visible(button)
 
-
+@pytest.mark.ui
 @pytest.mark.home
 @pytest.mark.parametrize("menu_header, url_contain", [
         ('Кредиты', 'kredity'),

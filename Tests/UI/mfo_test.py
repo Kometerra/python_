@@ -1,7 +1,8 @@
 import pytest
 from Tests.UI.Helpers.Assertions import UIAssertions
-from Pages.mfo_page import MfoPage
+from Tests.UI.Pages.mfo_page import MfoPage
 
+@pytest.mark.ui
 @pytest.mark.mfo
 def test_check_mfo_terms(page, get_base_url_ui):
     mfo_page = MfoPage(page, get_base_url_ui)

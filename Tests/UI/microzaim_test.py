@@ -1,7 +1,8 @@
 import pytest
 from Tests.UI.Helpers.Assertions import UIAssertions
-from Pages.microzaim_page import MicrozaimPage
+from Tests.UI.Pages.microzaim_page import MicrozaimPage
 
+@pytest.mark.ui
 @pytest.mark.microzaim
 def test_get_microzaim(page, get_base_url_ui):
     microzaim_page = MicrozaimPage(page, get_base_url_ui)

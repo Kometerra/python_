@@ -1,7 +1,8 @@
 import pytest
 from Tests.UI.Helpers.Assertions import UIAssertions
-from Pages.insurance_page import InsurancePage
+from Tests.UI.Pages.insurance_page import InsurancePage
 
+@pytest.mark.ui
 @pytest.mark.insurance
 def test_select_insurance(page, get_base_url_ui):
     """
