@@ -1,7 +1,8 @@
 import pytest
 from Tests.UI.Helpers.Assertions import UIAssertions
-from Pages.vklady_page import VkladyPage
+from Tests.UI.Pages.vklady_page import VkladyPage
 
+@pytest.mark.ui
 @pytest.mark.vklady
 def test_filter_vklady(page, get_base_url_ui):
     vklady_page = VkladyPage(page, get_base_url_ui)

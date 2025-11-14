@@ -1,7 +1,23 @@
 from Tests.UI.Pages.base_page import BasePage
 from Tests.UI.Locators.vklady_locators import VkladySelectors
 from Tests.UI.Helpers.Endpoints import Endpoints
-
+"""
+    Класс VkladyPage предназначен для взаимодействия со страницей вкладов в веб-приложении.
+    Наследует базовые функции от BasePage и предоставляет методы для открытия страницы, заполнения формы,
+    выбора различных фильтров и параметров вкладов, а также получения информации о выбранных элементах.
+    
+    Методы:
+    - open(): открывает страницу вкладов по указанному эндпоинту.
+    - fill_money(quantity): вводит сумму вклада в соответствующее поле.
+    - choose_opening_method(opening_method_text): выбирает метод открытия вклада по тексту.
+    - click_all_filters(text): активирует все фильтры по текстовому описанию.
+    - click_checkbox_with_text(text): ставит галочку в чекбоксе по тексту.
+    - choose_bank(text): выбирает банк из выпадающего списка.
+    - choose_term(text): выбирает срок вклада.
+    - click_show_button(text): нажимает кнопку для отображения результатов или подтверждения.
+    - get_bank_name(text): возвращает элемент с названием банка.
+    - get_terms(text): возвращает элемент с условиями или сроками вклада.
+"""
 class VkladyPage(BasePage):
 
     def open(self):
