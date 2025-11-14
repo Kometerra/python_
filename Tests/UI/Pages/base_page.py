@@ -21,7 +21,9 @@ class BasePage:
         Открывает страницу.
 
         :param endpoint: эндпоинт к base url
+        :raises AssertionError: если страница не открылось в установленное время или произошла ошибка.
         """
+
         full_url = f"{self.base_url.rstrip('/')}/{endpoint.lstrip('/')}"
         try:
             self.page.goto(full_url)
@@ -32,8 +34,14 @@ class BasePage:
             raise AssertionError(f'Ошибка при переходе на страницу {full_url}: {str(e)}')
 
 
-
     def find(self, selector: str):
+        """
+            Находит элемент по селектору и ожидает его видимости.
+
+            :param selector: селектор элемента.
+            :return: Локатор элемента для дальнейших действий.
+            :raises AssertionError: если элемент не найден или не виден в течение таймаута или при ошибке.
+        """
        try:
            locator = self.page.locator(selector)
            expect(locator).to_be_visible(timeout=self.timeout)
@@ -43,7 +51,15 @@ class BasePage:
        except Error as e:
            raise AssertionError(f'Ошибка при поиске элемента {selector}: {str(e)}')
 
+
+
     def click(self, selector: str):
+        """
+            Находит и кликает по элементу.
+
+            :param selector: селектор элемента.
+            :raises AssertionError: если элемент не кликабелен или произошла ошибка.
+        """
        try:
            locator = self.find(selector)
            locator.click(timeout=self.timeout)
@@ -54,6 +70,13 @@ class BasePage:
 
 
     def type(self, selector: str, text: str):
+        """
+            Находит элемент и заполняет его текстом.
+
+            :param selector: селектор элемента.
+            :param text: Текст для ввода.
+            :raises AssertionError: если невозможно заполнить элемент или произошла ошибка.
+        """
         try:
             locator = self.find(selector)
             locator.fill(text, timeout=self.timeout)
@@ -64,6 +87,13 @@ class BasePage:
 
 
     def get_text(self, selector: str):
+        """
+            Получает внутренний текст элемента.
+
+            :param selector: селектор элемента.
+            :return: Текст внутри элемента.
+            :raises AssertionError: если невозможно получить текст или произошла ошибка.
+         """
         try:
             locator = self.find(selector)
             return locator.inner_text(timeout=self.timeout)
@@ -74,6 +104,14 @@ class BasePage:
 
 
     def click_by_selector_and_text(self,selector: str,text: str, flag: bool):
+        """
+            Находит подэлемент по тексту внутри выбранного селектора и кликает по нему.
+
+            :param selector: селектор контейнера.
+            :param text: Текст, по которому ищется элемент.
+            :param flag: Флаг точного совпадения текста.
+            :raises AssertionError: если элемент с текстом не найден или не кликабелен, или произошла ошибка.
+        """
         try:
             locator = self.find(selector)
             target = locator.get_by_text(text,exact=flag)
@@ -86,6 +124,15 @@ class BasePage:
 
 
     def get_element_by_selector_and_text(self,selector: str,text: str, flag: bool):
+        """
+            Находит элемент по селектору и тексту внутри него и возвращает его.
+
+            :param selector: селектор контейнера.
+            :param text: Текст, по которому ищется элемент.
+            :param flag: Флаг точного совпадения текста.
+            :return: Локатор найденного элемента.
+            :raises AssertionError: если элемент не найден или не виден, или произошла ошибка.
+        """
         try:
             locator = self.find(selector)
             target = locator.get_by_text(text, exact=flag)
@@ -98,6 +145,13 @@ class BasePage:
 
 
     def click_coordinates(self,selector: str, percent:float):
+        """
+            Производит клик по координатам внутри элемента, рассчитанным по проценту от ширины.
+
+            :param selector: селектор элемента.
+            :param percent: Процент по ширине элемента, где нужно кликнуть.
+            :raises AssertionError: если произошла ошибка при вычислении координат или клике.
+        """
         try:
             track = self.find(selector)
             box = track.bounding_box()
@@ -112,6 +166,11 @@ class BasePage:
 
 
     def reload(self):
+        """
+            Перезагружает текущую страницу и ожидает загрузки.
+
+            :raises AssertionError: если страница не перезагрузилась или не достигла состояния 'domcontentloaded'.
+        """
         try:
             self.page.reload()
             self.page.wait_for_load_state("domcontentloaded", timeout=self.timeout)
@@ -122,6 +181,14 @@ class BasePage:
 
 
     def click_by_selector_and_text_and_index(self,selector: str,text: str, index: int):
+        """
+            Находит элемент по селектору и тексту, выбирает его по индексу и кликает.
+
+            :param selector: селектор контейнера.
+            :param text: Текст для поиска.
+            :param index: Индекс элемента среди найденных с совпадением текста.
+            :raises AssertionError: если элемент не найден или не кликабелен, или произошла ошибка.
+        """
         try:
             locator = self.find(selector)
             target = locator.get_by_text(text,exact=True).nth(index)

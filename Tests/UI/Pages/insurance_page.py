@@ -3,7 +3,20 @@ from Tests.UI.Locators.insurance_locators import InsuranceSelectors
 from Tests.UI.Helpers.Endpoints import Endpoints
 from Tests.UI.Helpers.DateHelper import DateHelper
 import logging
-
+"""
+    Класс InsurancePage представляет страницу оформления страхового полиса в веб-приложении.
+    Он расширяет базовые функции класса BasePage, предоставляя методы для открытия страницы,
+    взаимодействия с элементами формы (такими как поля ввода, кнопки и чекбоксы),
+    а также для заполнения данных и навигации по странице.
+    
+    Методы:
+    - open(): открывает страницу страхования по указанному эндпоинту.
+    - click_destination_input(): кликает на поле выбора направления.
+    - input_country(text): вводит название страны в соответствующее поле.
+    - select_country(text): выбирает страну из списка по названию.
+    - click_continue(text): кликает на кнопку продолжения с заданным текстом.
+    - input_age(text): вводит возраст в соответствующее поле.
+"""
 class InsurancePage(BasePage):
     def open(self):
         self.open_page(Endpoints.INSURANCE)

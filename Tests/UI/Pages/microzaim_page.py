@@ -1,7 +1,17 @@
 from Tests.UI.Pages.base_page import BasePage
 from Tests.UI.Locators.microzaim_locators import MicrozaimSelectors
 from Tests.UI.Helpers.Endpoints import Endpoints
-
+"""
+    Класс MicrozaimPage предназначен для взаимодействия с страницей микрозаймов в веб-приложении.
+    Наследует от BasePage и предоставляет методы для открытия страницы, взаимодействия с слайдерами для выбора суммы займа и срока, а также для инициирования получения займа и получения всплывающих окон.
+    
+    Методы:
+    - open(): открывает страницу микрозаймов по заданному эндпоинту.
+    - click_money_with_coordinates(money): при помощи координат передвигает ползунок суммы займа, рассчитывая позицию исходя из суммы.
+    - click_term_with_coordinates(term): перемещает ползунок срока займа, преобразуя значение в координату.
+    - click_get_zaim(text): кликает по кнопке с указанным текстом для получения займа.
+    - get_popup_term(): возвращает элемент всплывающего окна, связанного с условиями займа.
+"""
 class MicrozaimPage(BasePage):
 
     def open(self):
